@@ -17,6 +17,8 @@ namespace FileManager3
         {
             InitializeComponent();
             PopulateDataGridView(dataGridView_Drives);
+            
+
         }
 
         static void PopulateDataGridView(DataGridView dataGridView)
@@ -26,17 +28,23 @@ namespace FileManager3
             int height = 29;
             foreach (DriveInfo drive in Drives)
             {
-                string[] row = {drive.Name, drive.DriveType.ToString(), drive.DriveFormat, (drive.TotalSize / (long)1e6).ToString() + " MiB", 
-                    (drive.TotalFreeSpace / (long)1e6).ToString() + " MiB", (drive.TotalFreeSpace * 100 / drive.TotalSize).ToString()};
+                string[] row = {drive.Name, drive.DriveType.ToString(), drive.DriveFormat, (ToGiB(drive.TotalSize)).ToString() + " GiB", 
+                    ToGiB(drive.TotalFreeSpace).ToString() + " GiB", (drive.TotalFreeSpace * 100 / drive.TotalSize).ToString()};
                 dataGridView.Rows.Add(row);
                 height += 25;
             }
             dataGridView.Height = height;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timerRefresh_Tick(object sender, EventArgs e)
         {
             PopulateDataGridView(dataGridView_Drives);
+            
+        }
+
+        static double ToGiB(long bytes)
+        {
+            return ((bytes / (long)1e7) / 100.0);
         }
     }
 
