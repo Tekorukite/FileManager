@@ -1,39 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using InfoLibFW;
 
 namespace FileManager3
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
-            
             InitializeComponent();
             Show();
             PopulateDataGridView(dataGridView_Drives);
             textBox_Status.Text = "Loading";
             Application.DoEvents();
-            PopulateDirTree(treeView1_SourceFiles, true);
-            PopulateDirTree(treeView_TargetDir, false);
+
+            Thread thSource = new Thread(threadProcSource);
+            thSource.Start();
+            Thread thTarget = new Thread(threadProcTarget);
+            thTarget.Start();
+
             textBox_Status.Text = "Ready.";
             Application.DoEvents();
-
-
-
         }
 
+        private void threadProcSource(Object StateInfo)
+        {
+            PopulateDirTree(treeView1_SourceFiles, true);
+        }
 
+        private void threadProcTarget(Object StateInfo)
+        {
+            PopulateDirTree(treeView_TargetDir, false);
 
+        }
 
         static void PopulateDataGridView(DataGridView dataGridView)
         {
@@ -64,27 +66,28 @@ namespace FileManager3
             return ((bytes / (long)1e7) / 100.0);
         }
 
-
-        
-
-
         public void PopulateDirTree(TreeView treeView, bool isSource)
         {
-            treeView.Nodes.Clear();
-            TreeNode rootNode;
-
-            DriveInfo[] Drives = DriveInfo.GetDrives();
-            foreach (DriveInfo drive in Drives)
+            this.Invoke((MethodInvoker) delegate
             {
-                if (drive.IsReady)
+                treeView.Nodes.Clear();
+                TreeNode rootNode;
+
+                DriveInfo[] Drives = DriveInfo.GetDrives();
+                foreach (DriveInfo drive in Drives)
                 {
-                    DirectoryInfo dir = new DirectoryInfo(drive.Name);
-                    rootNode = new TreeNode(drive.Name);
-                    rootNode.Tag = drive.ToString();
-                    GetDirs(dir.GetDirectories(), rootNode, isSource);
-                    treeView.Nodes.Add(rootNode);
+                    if (drive.IsReady)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(drive.Name);
+                        rootNode = new TreeNode(drive.Name);
+                        rootNode.Tag = drive.ToString();
+                        GetDirs(dir.GetDirectories(), rootNode, isSource);
+                        treeView.Nodes.Add(rootNode);
+                    }
                 }
-            }
+            });
+            
+            
         }
 
         private void GetDirs(DirectoryInfo[] subDirs, TreeNode nodeToAddTo, bool isSource)
@@ -149,9 +152,6 @@ namespace FileManager3
             }
         }
 
-        
-
-
         private void button_Refresh_Click(object sender, EventArgs e)
         {
             MessageBox.Show("It will take some time. Go drink coffee ;)");
@@ -201,7 +201,14 @@ namespace FileManager3
 
         private void button_Copy_Click(object sender, EventArgs e)
         {
+            Thread th = new Thread(CopyFiles);
+            th.Start();
+        }
+
+        private void CopyFiles()
+        {
             List<FileInfo> fileList = GetFileList();
+            int progress = 0;
             foreach (FileInfo file in fileList)
             {
                 try
@@ -211,15 +218,21 @@ namespace FileManager3
                     file.CopyTo(textBox_TargetDir.Text + "\\" + file.Name, checkBox_Overwrite.Checked);
                 }
                 catch { MessageBox.Show("Got sometroubles\n I'm SO sorry..."); }
-
+                progress++;
+                MethodInvoker m = new MethodInvoker(() => progressBar.Value = progress * 100 / fileList.Count);
+                progressBar.Invoke(m);
 
             }
-            textBox_Status.Text = "Refresing the tree.";
-            Application.DoEvents();
-            PopulateDirTree(treeView1_SourceFiles, true);
-            PopulateDirTree(treeView_TargetDir, false);
-            textBox_Status.Text = "Ready.";
-            Application.DoEvents();
+            this.Invoke((MethodInvoker)delegate
+           {
+               textBox_Status.Text = "Refresing the tree.";
+               Application.DoEvents();
+               PopulateDirTree(treeView1_SourceFiles, true);
+               PopulateDirTree(treeView_TargetDir, false);
+               textBox_Status.Text = "Ready";
+               Application.DoEvents();
+
+           });
         }
 
         private List<FileInfo> GetFileList()
@@ -329,7 +342,11 @@ namespace FileManager3
         {
             Application.Exit();
         }
-    }
 
-    
+        private void button_Info_Click(object sender, EventArgs e)
+        {
+            Creator creator = new Creator();
+            creator.Show();
+        }
+    }
 }
