@@ -324,6 +324,11 @@ namespace FileManager3
             textBox_Status.Text = "Ready.";
             Application.DoEvents();
         }
+
+        private void button_Quit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 
     

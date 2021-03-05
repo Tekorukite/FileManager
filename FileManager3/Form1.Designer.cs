@@ -30,13 +30,13 @@ namespace FileManager3
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox_Drives = new System.Windows.Forms.GroupBox();
             this.dataGridView_Drives = new System.Windows.Forms.DataGridView();
@@ -96,14 +96,14 @@ namespace FileManager3
             // 
             this.dataGridView_Drives.AllowUserToAddRows = false;
             this.dataGridView_Drives.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Drives.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Drives.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.dataGridView_Drives.ColumnHeadersHeight = 29;
             this.dataGridView_Drives.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView_Drives.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -113,14 +113,14 @@ namespace FileManager3
             this.TotalDriveSpace,
             this.FreeDriveSpace,
             this.FreeDriveSpacePercent});
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_Drives.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_Drives.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridView_Drives.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Drives.Location = new System.Drawing.Point(2, 14);
             this.dataGridView_Drives.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -134,8 +134,8 @@ namespace FileManager3
             // DriveName
             // 
             this.DriveName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.DriveName.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.DriveName.DefaultCellStyle = dataGridViewCellStyle30;
             this.DriveName.HeaderText = "Name";
             this.DriveName.MinimumWidth = 6;
             this.DriveName.Name = "DriveName";
@@ -144,8 +144,8 @@ namespace FileManager3
             // DriveType
             // 
             this.DriveType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DriveType.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DriveType.DefaultCellStyle = dataGridViewCellStyle31;
             this.DriveType.HeaderText = "Type";
             this.DriveType.MinimumWidth = 6;
             this.DriveType.Name = "DriveType";
@@ -162,8 +162,8 @@ namespace FileManager3
             // TotalDriveSpace
             // 
             this.TotalDriveSpace.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.TotalDriveSpace.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.TotalDriveSpace.DefaultCellStyle = dataGridViewCellStyle32;
             this.TotalDriveSpace.HeaderText = "Total Space";
             this.TotalDriveSpace.MinimumWidth = 6;
             this.TotalDriveSpace.Name = "TotalDriveSpace";
@@ -172,8 +172,8 @@ namespace FileManager3
             // FreeDriveSpace
             // 
             this.FreeDriveSpace.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.FreeDriveSpace.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FreeDriveSpace.DefaultCellStyle = dataGridViewCellStyle33;
             this.FreeDriveSpace.HeaderText = "Free Space";
             this.FreeDriveSpace.MinimumWidth = 6;
             this.FreeDriveSpace.Name = "FreeDriveSpace";
@@ -182,8 +182,8 @@ namespace FileManager3
             // FreeDriveSpacePercent
             // 
             this.FreeDriveSpacePercent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.FreeDriveSpacePercent.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FreeDriveSpacePercent.DefaultCellStyle = dataGridViewCellStyle34;
             this.FreeDriveSpacePercent.HeaderText = "Free Space (%)";
             this.FreeDriveSpacePercent.MinimumWidth = 6;
             this.FreeDriveSpacePercent.Name = "FreeDriveSpacePercent";
@@ -218,6 +218,7 @@ namespace FileManager3
             this.button_Quit.TabIndex = 3;
             this.button_Quit.Text = "Quit";
             this.button_Quit.UseVisualStyleBackColor = true;
+            this.button_Quit.Click += new System.EventHandler(this.button_Quit_Click);
             // 
             // button_Copy
             // 
