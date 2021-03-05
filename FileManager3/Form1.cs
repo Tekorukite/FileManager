@@ -23,14 +23,31 @@ namespace FileManager3
             PopulateDataGridView(dataGridView_Drives);
             textBox_Status.Text = "Loading";
             Application.DoEvents();
-            PopulateDirTree(treeView1_SourceFiles, true);
-            PopulateDirTree(treeView_TargetDir, false);
+
+            Thread thSource = new Thread(threadProcSource);
+            thSource.Start();
+            Thread thTarget = new Thread(threadProcTarget);
+            thTarget.Start();
+
             textBox_Status.Text = "Ready.";
             Application.DoEvents();
 
 
 
         }
+
+
+        private void threadProcSource(Object StateInfo)
+        {
+            PopulateDirTree(treeView1_SourceFiles, true);
+        }
+
+        private void threadProcTarget(Object StateInfo)
+        {
+            PopulateDirTree(treeView_TargetDir, false);
+
+        }
+
 
 
 
@@ -70,21 +87,26 @@ namespace FileManager3
 
         public void PopulateDirTree(TreeView treeView, bool isSource)
         {
-            treeView.Nodes.Clear();
-            TreeNode rootNode;
-
-            DriveInfo[] Drives = DriveInfo.GetDrives();
-            foreach (DriveInfo drive in Drives)
+            this.Invoke((MethodInvoker) delegate
             {
-                if (drive.IsReady)
+                treeView.Nodes.Clear();
+                TreeNode rootNode;
+
+                DriveInfo[] Drives = DriveInfo.GetDrives();
+                foreach (DriveInfo drive in Drives)
                 {
-                    DirectoryInfo dir = new DirectoryInfo(drive.Name);
-                    rootNode = new TreeNode(drive.Name);
-                    rootNode.Tag = drive.ToString();
-                    GetDirs(dir.GetDirectories(), rootNode, isSource);
-                    treeView.Nodes.Add(rootNode);
+                    if (drive.IsReady)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(drive.Name);
+                        rootNode = new TreeNode(drive.Name);
+                        rootNode.Tag = drive.ToString();
+                        GetDirs(dir.GetDirectories(), rootNode, isSource);
+                        treeView.Nodes.Add(rootNode);
+                    }
                 }
-            }
+            });
+            
+            
         }
 
         private void GetDirs(DirectoryInfo[] subDirs, TreeNode nodeToAddTo, bool isSource)
@@ -201,7 +223,14 @@ namespace FileManager3
 
         private void button_Copy_Click(object sender, EventArgs e)
         {
+            Thread th = new Thread(CopyFiles);
+            th.Start();
+        }
+
+        private void CopyFiles()
+        {
             List<FileInfo> fileList = GetFileList();
+            int progress = 0;
             foreach (FileInfo file in fileList)
             {
                 try
@@ -211,15 +240,29 @@ namespace FileManager3
                     file.CopyTo(textBox_TargetDir.Text + "\\" + file.Name, checkBox_Overwrite.Checked);
                 }
                 catch { MessageBox.Show("Got sometroubles\n I'm SO sorry..."); }
-
+                progress++;
+                MethodInvoker m = new MethodInvoker(() => progressBar.Value = progress * 100 / fileList.Count);
+                progressBar.Invoke(m);
 
             }
-            textBox_Status.Text = "Refresing the tree.";
-            Application.DoEvents();
-            PopulateDirTree(treeView1_SourceFiles, true);
-            PopulateDirTree(treeView_TargetDir, false);
-            textBox_Status.Text = "Ready.";
-            Application.DoEvents();
+            this.Invoke((MethodInvoker)delegate
+           {
+               textBox_Status.Text = "Refresing the tree.";
+               Application.DoEvents();
+               PopulateDirTree(treeView1_SourceFiles, true);
+               PopulateDirTree(treeView_TargetDir, false);
+               textBox_Status.Text = "Ready";
+               Application.DoEvents();
+
+           });
+
+
+
+            /*MethodInvoker txbox = new MethodInvoker(() => textBox_Status.Text = "Refresing the tree.");
+            progressBar.Invoke(txbox);
+            
+            txbox = new MethodInvoker(() => textBox_Status.Text = "Ready");
+            progressBar.Invoke(txbox);*/
         }
 
         private List<FileInfo> GetFileList()
